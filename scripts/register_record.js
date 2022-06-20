@@ -1,22 +1,24 @@
 const hre = require("hardhat")
 const contract_json = require("../artifacts/contracts/Domains.sol/Domains.json")
-
+//https://mumbai.polygonscan.com/token/0x8892307a36A04271B69A9EC575f2Ae8089AFCb7c#balances
+//https://mumbai.polygonscan.com/address/0x8892307a36A04271B69A9EC575f2Ae8089AFCb7c
 const abi = contract_json.abi
-
+let domain_name = "JohnDemoc"
+let record_des = "Who is country owner?"
 async function main() {
     // create provider ==> connect wallet 
     // invoke  contract
     const alchemy_provider = new hre.ethers.providers.AlchemyProvider(
         'maticmum', process.env.ALCHEMY_MUMBAI_API_KEY
     )
+    // set pk of any user = 'xxxxxxxxxxx'
     const userWallet = new hre.ethers.Wallet(process.env.PRIVATE_KEY, alchemy_provider);
     const domainContract = new hre.ethers.Contract(
         process.env.ALCHEMY_MUMBAI_CONTRACT_ADDRESS
         , abi
         , userWallet)
 
-    let domain_name = "JohnBozza"
-    let record_des = "Remember who the real enemy is"
+
     const fee =
         domain_name.length === 3
             ? "0.5"
